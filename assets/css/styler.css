@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f4f4f9;
+}
+#main-cart {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.slider-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+.range-slider {
+    position: relative;
+    height: 40px;
+}
+
+input[type="range"] {
+    /* -webkit-appearance: none;
+    appearance: none; */
+    width: 100%;
+    height: 8px;
+    background: transparent;
+    position: absolute;
+    pointer-events: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #3498db;
+    border-radius: 50%;
+    pointer-events: all;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #3498db;
+    border-radius: 50%;
+    pointer-events: all;
+    cursor: pointer;
+    border: 2px solid #fff;
+}
+
+/* .range-slider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: #ddd;
+    border-radius: 5px;
+    transform: translateY(-50%);
+}
+
+.range-slider::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    height: 8px;
+    background: #3498db;
+    border-radius: 5px;
+    transform: translate(-16%, -50%);
+    z-index: 1;
+} */
+
+.range-slider::after {
+    left: var(--min, 0);
+    right: calc(100% - var(--max, 100%));
+}
+
+
+/* --------------Start-Silderbar------------------- */
+.siderbar {
+    width: 210px;
+}
+.accordion {
+    width: 100%;
+    /* margin: 2rem auto; */
+}
+
+.accordion-item {
+    background-color: #fff;
+    color: #111;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
+}
+
+.accordion-item-header {
+    padding: 0.5rem 3rem 0.5rem 1rem;
+    min-height: 3.5rem;
+    line-height: 1.25rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.accordion-item-header::after {
+    content: "\002B";
+    font-size: 2rem;
+    position: absolute;
+    right: 1rem;
+}
+
+.accordion-item-header.active::after {
+    content: "\2212";
+}
+
+.accordion-item-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.accordion-item-body-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1.4rem 1rem 1rem 1rem;
+    line-height: 1.5rem;
+    border-top: 1px solid;
+    border-image: linear-gradient(to right, transparent, #34495e, transparent) 1;
+}
+
+input[type="checkbox"]#abst {
+    display: block;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+.accordion-item-body-content input {
+    cursor: pointer;
+}
+
+input#minSlider {
+    display: none;
+}
+  
+
+.accordion-item-body-content .ip-check {
+    color: #7082B0;
+    margin: 0;
+    font-size: 15px;
+}
+
+.col-4.siderbar {
+    width: 320px;
+}
+
+main.main {
+    position: absolute;
+    top: 20px;
+}
+
+#main-product {
+    display: flex !important;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.color-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    transition: border 0.3s ease;
+}
+
+.color-item input[type="checkbox"]:checked + .color-box {
+    border-color: #000; /* Đổi màu theo ý thích */
+}
+
+
+
+@media(max-width:767px) {
+    html {
+        font-size: 14px;
+    }
+}
+
+.name-product {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 20px 0;
+
+}
+
+.cart-main {
+    padding: 10px;
+    cursor: pointer;
+}
+.cart-main img {
+    width: 100%;
+}
+
+.cart-main:hover .bx-heart{
+    display: block;
+    transition: all .3s ease-in;
+    color: red;
+}
+
+.img-product {
+    height: 262px;
+    background-color: #F7F7F7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .3s ease-in;
+    position: relative;
+}
+
+i.bx.bx-heart  {
+    /* display: none; */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    transition: all .3s ease-in-out;
+    color: #7082B0;
+}
+
+.img-product:hover img {
+    scale: 1.2;
+    transition: all .3s ease-in;
+}
+
+/* --------------End-Silderbar------------------- */
+
+
+
+
+.list-color {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    padding: 10px 10px 10px 16px;
+}
+
+.color-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.color-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+}
+
+/* Ẩn biểu tượng dấu tích mặc định */
+.color-item i {
+    display: none;
+    color: white; /* Màu dấu tích */
+    font-size: 16px; /* Kích thước dấu tích */
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translate(-50%, -50%);
+}
+
+/* Hiển thị biểu tượng khi checkbox được chọn */
+.color-item input[type="checkbox"]:checked + i {
+    display: inline;
+}
+
+/* Tùy chỉnh color-box */
+.color-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    border: 2px solid transparent;
+    border-radius: 3px;
+    position: relative;
+}
+label.color-item {
+    position: relative;
+}
+
+i#checked-test {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    transform: translate(0px, 2px);
+}
+
+
