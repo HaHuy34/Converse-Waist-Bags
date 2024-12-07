@@ -15,6 +15,7 @@ body {
     margin: 0;
     background-color: #f4f4f9;
 }
+
 #main-cart {
     display: flex !important;
     align-items: center;
@@ -66,28 +67,83 @@ input[type="range"]::-moz-range-thumb {
     border: 2px solid #fff;
 }
 
-/* .range-slider::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 8px;
-    background: #ddd;
-    border-radius: 5px;
-    transform: translateY(-50%);
+.cart-main {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: all .3s ease-in-out;
+    align-items: center;
+    overflow: hidden;
 }
 
-.range-slider::after {
-    content: '';
+.cart-main-bas {
+    position: absolute;
+    right: -20px;
+    top: -10px;
+    z-index: 9999;
+    text-align: end;
+    width: fit-content;
+}
+
+.bx-basket {
+    font-size: 30px;
+    color: red;
+    position: relative;
+}
+
+
+#cart-count {
+    position: absolute;
+    top: 0;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    font-size: 13px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-to-cart {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    text-align: center;
+    width: max-content;
+    /* display: none; */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    transition: all .3s ease-in-out;
+}
+
+#price {
+    color: red;
+    font-size: 20px;
+}
+
+.add-to-cart:hover {
+    background-color: #fff;
+    border: 1px solid #000;
+    color: #000;
+}
+
+.cart-main:hover .add-to-cart {
+    display: block;
     position: absolute;
     top: 50%;
-    height: 8px;
-    background: #3498db;
-    border-radius: 5px;
-    transform: translate(-16%, -50%);
-    z-index: 1;
-} */
+    transition: all .3s ease-in-out;
+}
+
+.add-to-cart p {
+    margin: 0 !important;
+}
 
 .range-slider::after {
     left: var(--min, 0);
@@ -99,6 +155,7 @@ input[type="range"]::-moz-range-thumb {
 .siderbar {
     width: 210px;
 }
+
 .accordion {
     width: 100%;
     /* margin: 2rem auto; */
@@ -165,7 +222,7 @@ input[type="checkbox"] {
 input#minSlider {
     display: none;
 }
-  
+
 
 .accordion-item-body-content .ip-check {
     color: #7082B0;
@@ -201,8 +258,9 @@ main.main {
     transition: border 0.3s ease;
 }
 
-.color-item input[type="checkbox"]:checked + .color-box {
-    border-color: #000; /* Đổi màu theo ý thích */
+.color-item input[type="checkbox"]:checked+.color-box {
+    border-color: #000;
+    /* Đổi màu theo ý thích */
 }
 
 
@@ -224,11 +282,12 @@ main.main {
     padding: 10px;
     cursor: pointer;
 }
+
 .cart-main img {
     width: 100%;
 }
 
-.cart-main:hover .bx-heart{
+.cart-main:hover .bx-heart {
     display: block;
     transition: all .3s ease-in;
     color: red;
@@ -246,7 +305,7 @@ main.main {
     position: relative;
 }
 
-i.bx.bx-heart  {
+i.bx.bx-heart {
     /* display: none; */
     position: absolute;
     top: 10px;
@@ -291,8 +350,10 @@ i.bx.bx-heart  {
 /* Ẩn biểu tượng dấu tích mặc định */
 .color-item i {
     display: none;
-    color: white; /* Màu dấu tích */
-    font-size: 16px; /* Kích thước dấu tích */
+    color: white;
+    /* Màu dấu tích */
+    font-size: 16px;
+    /* Kích thước dấu tích */
     position: absolute;
     top: 50%;
     left: 10px;
@@ -300,7 +361,7 @@ i.bx.bx-heart  {
 }
 
 /* Hiển thị biểu tượng khi checkbox được chọn */
-.color-item input[type="checkbox"]:checked + i {
+.color-item input[type="checkbox"]:checked+i {
     display: inline;
 }
 
@@ -314,6 +375,7 @@ i.bx.bx-heart  {
     border-radius: 3px;
     position: relative;
 }
+
 label.color-item {
     position: relative;
 }
@@ -325,4 +387,179 @@ i#checked-test {
     transform: translate(0px, 2px);
 }
 
+.basket-shake {
+    animation-name: shake;
+    animation: shake 6s 0.5s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0);
+    }
+
+    1% {
+        transform: rotate(30deg);
+    }
+
+    3% {
+        transform: rotate(-28deg);
+    }
+
+    5% {
+        transform: rotate(34deg);
+    }
+
+    7% {
+        transform: rotate(-32deg);
+    }
+
+    9% {
+        transform: rotate(30deg);
+    }
+
+    11% {
+        transform: rotate(-28deg);
+    }
+
+    13% {
+        transform: rotate(26deg);
+    }
+
+    15% {
+        transform: rotate(-24deg);
+    }
+
+    17% {
+        transform: rotate(22deg);
+    }
+
+    19% {
+        transform: rotate(-20deg);
+    }
+
+    21% {
+        transform: rotate(18deg);
+    }
+
+    23% {
+        transform: rotate(-16deg);
+    }
+
+    25% {
+        transform: rotate(14deg);
+    }
+
+    27% {
+        transform: rotate(-12deg);
+    }
+
+    29% {
+        transform: rotate(10deg);
+    }
+
+    31% {
+        transform: rotate(-8deg);
+    }
+
+    33% {
+        transform: rotate(6deg);
+    }
+
+    35% {
+        transform: rotate(-4deg);
+    }
+
+    37% {
+        transform: rotate(2deg);
+    }
+
+    39% {
+        transform: rotate(-1deg);
+    }
+
+    41% {
+        transform: rotate(1deg);
+    }
+
+    43% {
+        transform: rotate(0);
+    }
+
+    100% {
+        transform: rotate(0);
+    }
+}
+
+.shake {
+    animation: shake 1s ease-in-out;
+}
+
+#cart-modal {
+    position: relative;
+    display: none;
+}
+
+
+#cart-modal li {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.list-cart-shopping {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+#close-model {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: red;
+    border-radius: 100%;
+    display: flex;
+    color: #fff;
+}
+
+button.decrease,
+button.increase {
+    width: 30px;
+    border-radius: 10px;
+
+}
+
+span.quantity {
+    margin: 0 6px;
+}
+
+button.remove-item {
+    padding: 4px;
+    border-radius: 10px;
+}
+
+i#ico-main {
+    cursor: pointer;
+}
+
+div#cart-modal {
+    margin-top: 30px;
+    position: absolute;
+    top: 0;
+    left: -200%;
+    transition: all .3s ease-in-out;
+}
+
+ul#cart-list {
+    padding: 0 !important;
+}
+
+.cart-modal-show {
+    top: 50%;
+    left: 0;
+    transition: all .3s ease-in-out;
+}
 
