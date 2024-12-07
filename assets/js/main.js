@@ -187,7 +187,7 @@ function addBasketShakeEffect() {
   if (cartCount > 0) {
     cartIcon.classList.add("basket-shake");
     console.log(cartIcon.classList.add("basket-shake"));
-    
+
     // Xóa class "basket-shake" sau khi hiệu ứng hoàn tất
     setTimeout(() => {
       cartIcon.classList.remove("basket-shake");
@@ -213,6 +213,8 @@ document.querySelectorAll(".add-to-cart").forEach((button) => {
       image: productImage,
       quantity: 1, // Mặc định số lượng là 1
     };
+
+    console.log(product);
 
     // Kiểm tra sản phẩm đã tồn tại trong giỏ hàng chưa
     const existingProduct = cart.find((item) => item.id === productId);
@@ -245,60 +247,112 @@ function decreaseQuantity(productId) {
   }
 }
 
+
+
 function renderCart() {
   const cartList = document.getElementById("cart-list");
-  cartList.innerHTML = ""; // Xóa danh sách cũ
+  cartList.innerHTML = ""; // Xóa nội dung giỏ hàng cũ
+
   if (cart.length === 0) {
-    // Nếu giỏ hàng trống, hiển thị thông báo
     const emptyMessage = document.createElement("h2");
     emptyMessage.textContent = "Giỏ hàng của bạn đang trống!";
-    emptyMessage.style.textAlign = "center"; // Căn giữa thông báo
-    emptyMessage.style.marginTop = "60px"; 
-    emptyMessage.style.color = "red"; // Màu chữ thông báo
-    emptyMessage.style.fontStyle = "italic"; 
+    emptyMessage.style.color = "red";
+    emptyMessage.style.textAlign = "center";
     cartList.appendChild(emptyMessage);
-    return; // Dừng lại nếu giỏ hàng rỗng
+
+    // Cập nhật tổng giá trị thành 0 khi giỏ hàng trống
+    const totalPriceElement = document.getElementById("total-price");
+    totalPriceElement.textContent = `Tổng giá trị: 0 VNĐ`;
+
+    updateCartCount(); // Cập nhật số lượng giỏ hàng
+    return;
   }
+
   cart.forEach((item) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      <div class="list-cart-shopping">
-        <img src="${item.image}" alt="${item.name}" width="50">
-        <span>${item.name}</span>
-        <div class="quantity-controls">
-          <button class="decrease" data-id="${item.id}">-</button>
-          <span class="quantity" id="quantity-${item.id}">${item.quantity}</span>
-          <button class="increase" data-id="${item.id}">+</button>
-        </div>
-        <button class="remove-item" data-id="${item.id}"><i class='bx bxs-trash'></i></button>
-      </div>
-    `;
-    cartList.appendChild(li);
+    const row = document.createElement("tr");
+    const priceValue = parseInt(item.price.replace(/\D/g, ""));
+    const totalPrice = priceValue * item.quantity;
+
+    row.innerHTML = `
+          <td><img src="${item.image}" alt="${item.name}" width="50"></td>
+          <td>${item.name}</td>
+          <td>
+              <div class="quantity-controls">
+                  <button class="decrease" data-id="${item.id}">-</button>
+                  <span class="quantity">${item.quantity}</span>
+                  <button class="increase" data-id="${item.id}">+</button>
+              </div>
+          </td>
+          <td>${formatCurrency(totalPrice)} VNĐ</td>
+          <td><button class="remove-item" data-id="${item.id}"><i class='bx bxs-trash'></i></button></td>
+      `;
+    cartList.appendChild(row);
   });
 
-  // Gắn sự kiện cho các nút "Xóa"
-  document.querySelectorAll(".remove-item").forEach((button) => {
-    button.addEventListener("click", (e) => {
-      const productId = e.currentTarget.getAttribute("data-id"); // Lấy data-id từ nút chứa <i>
-      removeFromCart(productId); // Xóa sản phẩm khỏi giỏ hàng
-    });
-  });
+  // Tính tổng giá trị và tổng số lượng
+  const { totalQuantity, totalPrice } = calculateTotal();
+  
+  // Hiển thị tổng giá trị
+  const totalPriceElement = document.getElementById("total-price");
+  totalPriceElement.innerHTML = `Tổng giá trị: <span class="sum-money">${formatCurrency(totalPrice)} VNĐ</span>`;
 
-  // Gắn sự kiện cho các nút tăng/giảm số lượng
+
+  updateCartCount();
+
+  // Gắn sự kiện cho nút tăng/giảm số lượng
   document.querySelectorAll(".increase").forEach((button) => {
     button.addEventListener("click", (e) => {
       const productId = e.target.getAttribute("data-id");
-      updateQuantity(productId, 1); // Tăng số lượng
+      updateQuantity(productId, 1);
     });
   });
 
   document.querySelectorAll(".decrease").forEach((button) => {
     button.addEventListener("click", (e) => {
       const productId = e.target.getAttribute("data-id");
-      updateQuantity(productId, -1); // Giảm số lượng
+      updateQuantity(productId, -1);
     });
   });
+
+  // Gắn sự kiện xóa sản phẩm khỏi giỏ hàng
+ // Gắn sự kiện click cho cả nút xóa và biểu tượng xóa
+document.querySelectorAll(".remove-item").forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const productId = e.target.getAttribute("data-id");
+
+    // Kiểm tra nếu đối tượng click là biểu tượng <i>, chuyển sang nút chứa nó
+    if (e.target.tagName.toLowerCase() === "i") {
+      const button = e.target.closest("button"); // Tìm nút <button> chứa <i>
+      if (button) {
+        const productId = button.getAttribute("data-id");
+        removeFromCart(productId); // Xóa sản phẩm khỏi giỏ hàng
+      }
+    } else {
+      removeFromCart(productId); // Xóa sản phẩm khỏi giỏ hàng khi click vào <button>
+    }
+  });
+});
+
 }
+
+
+function calculateTotal() {
+  let totalQuantity = 0;
+  let totalPrice = 0;
+
+  cart.forEach((item) => {
+    totalQuantity += item.quantity;
+    const priceValue = parseFloat(item.price.replace(/\D/g, "")); // Loại bỏ ký tự không phải số
+    totalPrice += priceValue * item.quantity;
+  });
+
+  return {
+    totalQuantity,
+    totalPrice
+  };
+}
+calculateTotal()
+
 
 // Hàm xóa sản phẩm khỏi giỏ hàng
 function removeFromCart(productId) {
@@ -337,7 +391,12 @@ function blockShoppingCart() {
   const closeModer = document.getElementById("close-model");
   showCartModll.addEventListener("click", () => {
     showCartPhopping.style.display = "block";
-
+    showCartPhopping.style.position = "absolute";
+    showCartPhopping.style.left = "0%";
+    showCartPhopping.style.top = "0%";
+    showCartPhopping.style.background = "#f3f2f2";
+    showCartPhopping.style.height = "100%";
+    showCartPhopping.style.maxWidth = "710px";
   });
 
   closeModer.addEventListener("click", () => {

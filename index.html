@@ -13,13 +13,14 @@
     <title>Converse Waist Bags</title>
 </head>
 <main class="main">
-    <div class="cart-main-bas" id="block-cart-shopping">
-        <i class='bx bx-basket' id="ico-main">
-            <span id="cart-count">0</span>
-        </i>
-        
-    </div>
+   
     <div class="container">
+        <div class="cart-main-bas" id="block-cart-shopping">
+            <i class='bx bx-basket' id="ico-main">
+                <span id="cart-count">0</span>
+            </i>
+            
+        </div>
         <div class="row" id="main-product">
             <div class="col-4 siderbar">
                 <div class="accordion">
@@ -209,20 +210,56 @@
                         </div>
                     </div>
 
-                    <div id="cart-modal">
-                        <h2>Giỏ hàng của bạn</h2>
-                        <h3 id="close-model">X</h3>
-                        <ul id="cart-list"></ul>
-                    </div>
-
-                    <div class="list-cart-shopping">
-
-                    </div>
-
+                    
 
                 </div>
             </div>
 
+            <div id="cart-modal">
+                <h2>Giỏ hàng của bạn</h2>
+                <!-- <h3 id="close-model">X</h3> -->
+                <table id="cart-list"></table>
+                <div class="order-summary">
+                    <div class="name-title-order">
+                       <h3 style="margin-top: 20px;"> Order summary</h3>
+                    </div>
+                    <div class="main-order">
+                        <div class="main-order-left">
+                            <ul style="padding: 0; margin-top: 20px;">
+                                <li>Original price</li>
+                                <li>Savings</li>
+                                <li>Store Pickup</li>
+                                <li>Total</li>
+                            </ul>
+                        </div>
+
+                        <div class="main-order-right">
+                            <ul style="padding: 0; margin-top: 20px;">
+                                <li></li>
+                                <li></li>
+                                <li></li>
+                                <li id="total-price">Total</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="continu-check">
+                    <div class="continue-shopping" id="close-model">
+                        Continue Shopping
+                    </div>
+
+                    <div class="checkout-shopping">
+                        Proceed to Checkout
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="list-cart-shopping">
+
+            </div>
 
         </div>
     </div>
@@ -240,3 +277,16 @@
 </body>
 
 </html>
+
+
+
+  <!-- <div class="list-cart-shopping">
+    <img src="${item.image}" alt="${item.name}" width="50">
+    <span>${item.name}</span>
+    <div class="quantity-controls">
+      <button class="decrease" data-id="${item.id}">-</button>
+      <span class="quantity" id="quantity-${item.id}">${item.quantity}</span>
+      <button class="increase" data-id="${item.id}">+</button>
+    </div>
+    <button class="remove-item" data-id="${item.id}"><i class='bx bxs-trash'></i></button>
+  </div> -->
