@@ -678,13 +678,20 @@ border-radius: 10px;
     color: #000;
 }
 
-/* body::after {
-    position: absolute;
+#cart-modal::after {
+    position: fixed;
     content: "";
     height: 100%;
-    width: 100%;
     background-color: black;
     top: 0;
-    right: -100%;
+    left: 50%;
+    width: 50%;
     z-index: 99999999999999;
-} */
+    opacity: 0.5;
+    display: block; /* Ẩn theo mặc định, sẽ hiển thị khi modal mở */
+}
+
+#cart-modal.open::after {
+    display: block; /* Hiển thị lớp phủ khi modal mở */
+}
+

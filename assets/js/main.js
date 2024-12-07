@@ -396,11 +396,19 @@ function blockShoppingCart() {
     showCartPhopping.style.top = "0%";
     showCartPhopping.style.background = "#f3f2f2";
     showCartPhopping.style.height = "100%";
-    showCartPhopping.style.maxWidth = "710px";
+    showCartPhopping.style.maxWidth = "50%";
   });
 
   closeModer.addEventListener("click", () => {
     showCartPhopping.style.display = "none";
+  });
+
+  
+  showCartPhopping.addEventListener("click", (e) => {
+    if (e.target === showCartPhopping) {
+      showCartPhopping.style.display = "none";
+      showCartPhopping.classList.remove("open"); // Xóa class để ẩn lớp phủ
+    }
   });
 }
 
